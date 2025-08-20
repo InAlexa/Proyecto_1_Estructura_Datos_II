@@ -45,10 +45,21 @@ def main():
                 nombre = input("Nombre: ").strip()
                 servicio = input("Servicio: ").strip()
                 ubicacion = input("Ubicación: ").strip()
-                rating = input("Calificación (1 - 5): ").strip()
-                prov = Provider(id_, nombre, servicio, ubicacion, rating)
+
+                while True:
+                    try:
+                        rating = float(input("Calificación (1 - 5): ").strip())
+                        if 1.0 <= rating <= 5.0:
+                            break
+                        else:
+                            print("❌ La calificación debe estar en un intervalo 1 y 5.")
+                    except ValueError:
+                        print("❌ Ingresa un número válido.")
+
+                prov = Provider(id_, nombre, servicio, ubicacion, str(rating))
                 tree.insertar(id_, prov)
-                print("¡Proveedor insertado!")
+                print("✅ insertado con exito")
+
             except ValueError:
                 print("ID inválido.")
         elif op == "2":
